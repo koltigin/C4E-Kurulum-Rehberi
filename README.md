@@ -184,13 +184,6 @@ c4ed tendermint unsafe-reset-all --home /root/.c4e-chain --keep-addr-book
 sudo systemctl restart c4ed && journalctl -u c4ed -f -o cat
 ```
 
-## Servisi Başlatma
-```shell
-systemctl daemon-reload
-systemctl enable c4ed
-systemctl start c4ed
-```
-
 ## Logları Kontrol Etme
 ```shell
 journalctl -u c4ed -f -o cat
