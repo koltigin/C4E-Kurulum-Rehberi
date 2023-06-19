@@ -57,8 +57,8 @@ source $HOME/.bash_profile
 ### Örnek
 Node ve Cüzdan adımızın `Mehmet` olduğunu varsayalım. Kod aşağıdaki şekilde düzenlenecektir. 
 ```shell
-echo "export C4E_NODENAME=KolTigin"  >> $HOME/.bash_profile
-echo "export C4E_WALLET=KolTigin" >> $HOME/.bash_profile
+echo "export C4E_NODENAME=Mehmet"  >> $HOME/.bash_profile
+echo "export C4E_WALLET=Mehmet" >> $HOME/.bash_profile
 echo "export C4E_PORT=11" >> $HOME/.bash_profile
 echo "export C4E_CHAIN_ID=babajaga-1" >> $HOME/.bash_profile
 source $HOME/.bash_profile
