@@ -219,6 +219,11 @@ source $HOME/.bash_profile
 ## Faucet
 https://wallet-testnet.c4e.io/faucet adresine giderek token istiyoruz. 
 
+### Cüzdan Bakiyesine Bakma
+```
+c4ed query bank balances $C4E_WALLET_ADDRESS
+```
+
 🔴 **BU AŞAMADAN SONRA NODE'UMUZUN EŞLEŞMESİNİ BEKLİYORUZ.**
 
 ## Senkronizasyonu Kontrol Etme
@@ -337,7 +342,6 @@ c4ed keys delete $C4E_WALLET
 ```
 
 ### Cüzdan Bakiyesine Bakma
-
 ```
 c4ed query bank balances $C4E_WALLET_ADDRESS
 ```
