@@ -3,10 +3,10 @@
 ![C4E-GitHub](https://github.com/koltigin/C4E-Kurulum-Rehberi/assets/102043225/7037175e-f6bf-4f9f-a298-dd534c89f8fd)
 
 ## Bağlantılar
- ✔️ [Website]([https://www.quasar.fi/](https://c4e.io/))<br>
+ ✔️ [Website](https://c4e.io/)<br>
  ✔️ [Blockchain Explorer](https://explorer.c4e.io/)<br>
  ✔️ [Doküman](https://docs.c4e.io/validatorsGuide/Starttestnet/validator-setup.html#)<br>
- ✔️ [Discord]()<br>
+ ✔️ [Discord](https://discord.gg/chain4energy)<br>
  ✔️ [Zealy](https://zealy.io/c/c4e/invite/KiZnxeaimKSv6lTcNAILI)
 
 ## Gereksinimler 
