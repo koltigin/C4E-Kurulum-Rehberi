@@ -112,13 +112,8 @@ sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.c4e-chain/config/conf
 
 ## SEED ve PEERS Ayarlanması
 ```shell
-PEERS=""
-sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.c4e-chain/config/config.toml
-SEEDS=""
-sed -i.bak -e "s/^seeds =.*/seeds = \"$seeds\"/" $HOME/.c4e-chain/config/config.toml
-sed -i 's/max_num_inbound_peers =.*/max_num_inbound_peers = 50/g' $HOME/.c4e-chain/config/config.toml
-sed -i 's/max_num_outbound_peers =.*/max_num_outbound_peers = 50/g' $HOME/.c4e-chain/config/config.toml
-
+sed -e "s|persistent_peers = \".*\"|persistent_peers = \"$(cat .data | grep -oP 'Persistent peers\s+\K\S+')\"|g" ~/.c4e-chain/config/config.toml > ~/.c4e-chain/config/config.toml.tmp
+mv ~/.c4e-chain/config/config.toml.tmp  ~/.c4e-chain/config/config.toml
 ```
 
 ## Prometheus'u Aktif Etme
@@ -171,20 +166,15 @@ EOF
 
 ## StateSync Yükleme
 ```shell
-SNAP_RPC=http://c4e.rpc.m.stavr.tech:17097
-peers="e3d0b136495c3f4382ac801fbc89083d32625ff8@c4e.peer.stavr.tech:17096"
-sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.c4e-chain/config/config.toml
+SNAP_RPC="https://rpc-testnet.c4e.io:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 100)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
-
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
-
 sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
-s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.c4e-chain/config/config.toml
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.c4e-chain/config/config.toml
 c4ed tendermint unsafe-reset-all --home /root/.c4e-chain --keep-addr-book
 sudo systemctl restart c4ed && journalctl -u c4ed -f -o cat
 ```
