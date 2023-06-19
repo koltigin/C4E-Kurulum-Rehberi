@@ -163,6 +163,11 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 ```
+## Servisi Başlatma
+```shell
+systemctl daemon-reload
+systemctl enable c4ed
+```
 
 ## StateSync Yükleme
 ```shell
@@ -181,9 +186,9 @@ sudo systemctl restart c4ed && journalctl -u c4ed -f -o cat
 
 ## Servisi Başlatma
 ```shell
-sudo systemctl daemon-reload
-sudo systemctl enable c4ed
-sudo systemctl start c4ed
+systemctl daemon-reload
+systemctl enable c4ed
+systemctl start c4ed
 ```
 
 ## Logları Kontrol Etme
