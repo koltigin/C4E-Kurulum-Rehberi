@@ -228,10 +228,7 @@ source $HOME/.bash_profile
 ```
 
 ## Faucet
-[Quasar](https://discord.gg/quasarfi) adresine giderek `#🚰⎮testnet-faucet` kanalından `$request cuzdan-adresi` şeklinde mesaj atarak token istiyoruz. 
-
-## Faucet 2
-[stakely.io](https://stakely.io/en/faucet/quasar-testnet) adresine giderek tweet atıp token istiyoruz.
+https://wallet-testnet.c4e.io/faucet adresine giderek token istiyoruz. 
 
 🔴 **BU AŞAMADAN SONRA NODE'UMUZUN EŞLEŞMESİNİ BEKLİYORUZ.**
 
