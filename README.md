@@ -415,12 +415,7 @@ c4ed tx staking edit-validator \
 ### Validatoru Jail Durumundan Kurtarma 
 
 ```
-c4ed tx slashing unjail \
-  --broadcast-mode=block \
-  --from=$C4E_WALLET \
-  --chain-id=$C4E_CHAIN_ID \
-  --gas=auto
-  --gas-adjustment=1.4
+c4ed tx slashing unjail --from $C4E_WALLET --chain-id $C4E_CHAIN_ID --gas-prices 0.00001uc4e --gas-adjustment 1.5 --gas auto -y
 ```
 
 ### Node'u Tamamen Silme 
