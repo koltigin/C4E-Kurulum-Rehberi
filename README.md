@@ -68,14 +68,14 @@ source $HOME/.bash_profile
 ## C4E'nin Kurulması
 
 ```shell
-git clone --depth 1 --branch v1.2.0 https://github.com/chain4energy/c4e-chain.git
+git clone --depth 1 --branch v1.3.0 https://github.com/chain4energy/c4e-chain.git
 cd c4e-chain/
 make install
 mv build/c4ed $(which c4ed)
 mv ~/go/bin/c4ed /usr/local/bin/c4ed
 c4ed version
 ```
-Versiyon çıktısı `1.2.0` olacak.
+Versiyon çıktısı `1.3.0` olacak.
 
 
 
