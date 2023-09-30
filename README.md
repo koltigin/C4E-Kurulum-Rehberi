@@ -162,23 +162,34 @@ systemctl daemon-reload
 systemctl enable c4ed
 ```
 
-## StateSync Yükleme
+## StateSync Yükleme ([Stake Town](https://services.stake-town.com/home/testnet/c4e/sync#snapshot))
 ```shell
-SNAP_RPC="https://rpc-testnet.c4e.io:443"
-LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
+cp $HOME/.c4e-chain/data/priv_validator_state.json $HOME/.c4e-chain/priv_validator_state.json.backup
+c4ed tendermint unsafe-reset-all --home $HOME/.c4e-chain --keep-addr-book
+
+SNAP_RPC="https://c4e-testnet-rpc.stake-town.com:443"
+
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height)
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000))
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
-s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
-s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.c4e-chain/config/config.toml
-c4ed tendermint unsafe-reset-all --home /root/.c4e-chain --keep-addr-book
-sudo systemctl restart c4ed && journalctl -u c4ed -f -o cat
+
+PEERS="94a46ce2a5c5b835b84e121676847c5ee4eabf3f@65.109.65.248:35656"
+sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.c4e-chain/config/config.toml
+
+CONFIG_TOML=$HOME/.c4e-chain/config/config.toml
+sed -i 's|^enable *=.*|enable = true|' $CONFIG_TOML
+sed -i 's|^rpc_servers *=.*|rpc_servers = "'$SNAP_RPC,$SNAP_RPC'"|' $CONFIG_TOML
+sed -i 's|^trust_height *=.*|trust_height = '$BLOCK_HEIGHT'|' $CONFIG_TOML
+sed -i 's|^trust_hash *=.*|trust_hash = "'$TRUST_HASH'"|' $CONFIG_TOML
+
+mv $HOME/.c4e-chain/priv_validator_state.json.backup $HOME/.c4e-chain/data/priv_validator_state.json
 ```
 
-## Logları Kontrol Etme
+## Node Başlatma ve Logları Kontrol Etme
 ```shell
+systemctl start c4ed
 journalctl -u c4ed -f -o cat
 ```  
 
