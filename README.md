@@ -86,17 +86,10 @@ c4ed config chain-id $C4E_CHAIN_ID
 c4ed init --chain-id $C4E_CHAIN_ID $C4E_NODENAME
 ```
 
-## Zincirleri Kopyalama
+## Genesis ve addrbook Dosyasının Kopyalanması
 ```shell
-cd || return
-git clone https://github.com/chain4energy/c4e-chains.git
-cd c4e-chains/$C4E_CHAIN_ID
-```
-
-## Genesis Dosyasının Kopyalanması
-```shell
-cp genesis.json ~/.c4e-chain/config/
-
+wget https://raw.githubusercontent.com/chain4energy/c4e-chains/main/babajaga-1/genesis.json -O $HOME/.c4e-chain/config/genesis.json
+wget https://raw.githubusercontent.com/koltigin/C4E-Kurulum-Rehberi/main/addrbook.json -O $HOME/.c4e-chain/config/addrbook.json
 ```
 
 ## Minimum GAS Ücretinin Ayarlanması
