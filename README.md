@@ -427,7 +427,7 @@ rm /etc/systemd/system/c4ed.service && \
 systemctl daemon-reload && \
 cd $HOME && \
 rm -rf .c4e-chain c4e-chain && \
-rm -rf $(which c4ed) \
+rm -rf $(which c4ed)
 sed -i '/C4E_/d' ~/.bash_profile
 ```
 
