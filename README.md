@@ -29,7 +29,7 @@ apt install make clang pkg-config libssl-dev libclang-dev build-essential git cu
 
 ## Go Kurulumu
 ```shell
-ver="1.20"
+ver="1.20.3"
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
 rm -rf /usr/local/go
 tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
@@ -68,12 +68,11 @@ source $HOME/.bash_profile
 ## C4E'nin Kurulması
 
 ```shell
-git clone --depth 1 --branch v1.3.0 https://github.com/chain4energy/c4e-chain.git
-cd c4e-chain/
+cd $HOME
+git clone https://github.com/chain4energy/c4e-chain.git
+cd c4e-chain
+git checkout tags/v1.3.0
 make install
-mv build/c4ed $(which c4ed)
-mv ~/go/bin/c4ed /usr/local/bin/c4ed
-c4ed version
 ```
 Versiyon çıktısı `1.3.0` olacak.
 
