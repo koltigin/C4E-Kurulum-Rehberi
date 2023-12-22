@@ -160,7 +160,7 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 ```
-## Servisi Başlatma
+## Servisi Aktive Etme
 ```shell
 systemctl daemon-reload
 systemctl enable c4ed
